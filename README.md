@@ -1,4 +1,4 @@
-# Dev Colab Backend – README & API Documentation
+# uniteSUS 
 
 A role-based task & employee management backend built with **Node.js, Express, MongoDB, and JWT Authentication**.
 
@@ -6,7 +6,7 @@ This backend powers the Dev Colab platform, enabling admins to manage employees 
 
 ---
 
-## 🚀 Tech Stack
+## 🚀 Tech Stack (Backend)
 
 * Node.js
 * Express.js
