@@ -39,3 +39,42 @@ body {
 [data-theme="dark"] option {
   color: white;
 }
+
+
+
+:root[data-theme="light"] {
+  --bg-card: #ffffff;
+  --text-primary: #1f2937;
+  --btn-bg: #2563eb;
+  --btn-text: #ffffff;
+  --btn-border: #d1d5db;
+}
+
+:root[data-theme="dark"] {
+  --bg-card: #1f2937;
+  --text-primary: #f9fafb;
+  --btn-bg: #3b82f6;
+  --btn-text: #ffffff;
+  --btn-border: #4b5563;
+}
+
+button {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid var(--btn-border);
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.bg-card {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.nav-active {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+}

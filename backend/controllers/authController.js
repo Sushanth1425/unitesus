@@ -1,4 +1,5 @@
 const User= require('../models/User')
+const Employee= require('../models/Employee')
 const bcrypt= require('bcryptjs')
 const jwt= require('jsonwebtoken')
 
@@ -31,16 +32,23 @@ module.exports.loginAuth= async(req, res)=>{
     const {email, password}= req.body
     if (!email || !password) return res.status(400).json({message: "All fields are required!"})
 
-    const user= await User.findOne({email})
-    if (!user) return res.status(400).json({message: 'Invalid credentials'})
+    let account= await User.findOne({email})
+    let role= 'admin'
 
-    const validPwd= await bcrypt.compare(password, user.password);
+    if (!account) {
+      account= await Employee.findOne({email})
+      role= 'employee'
+    }
+    if (!account) return res.status(400).json({ message: "Invalid credentials" })
+
+    
+    const validPwd= await bcrypt.compare(password, account.password);
     if (!validPwd) return res.status(400).json({message: 'Invalid credentials'})
 
-    const payload= {id: user._id, role: user.role}
+    const payload= {id: account._id, role}
     const token= jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '1d'})
 
-    return res.status(200).json({message: 'Logged In Successfully !!', token, user: {id: user._id, name: user.name, email: user.email, role: user.role}})
+    return res.status(200).json({message: 'Logged In Successfully !!', token, user: {id: account._id, name: account.name, email: account.email, role}})
   }
   catch(err){
     console.error(err)

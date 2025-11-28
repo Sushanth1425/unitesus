@@ -1,15 +1,22 @@
 const Employee= require('../models/Employee')
+const Task= require('../models/Task')
+const bcrypt= require("bcryptjs")
 
-module.exports.createEmployee= async(req, res)=>{
-  try{
-    const newEmployee= new Employee({...req.body, createdBy: req.user._id})
-    await newEmployee.save()
+module.exports.createEmployee= async (req, res)=>{
+  try {
+    const {name, email, password}= req.body
+    if (!name || !email || !password) return res.status(400).json({message: 'All fields required'})
 
-    return res.status(201).json({message: 'Employee created Successfully !!'}, newEmployee)
-  }
-  catch(err){
-    console.error(err)
-    return res.status(500).json({message: 'Server error! Try again !!'})
+    const existing= await Employee.findOne({email})
+    if (existing) return res.status(400).json({message: "Employee already exists"})
+    const hashedPassword= await bcrypt.hash(password, 10)
+    const employee= new Employee({name, email: email.trim(), password: hashedPassword, createdBy: req.user.id})
+    await employee.save()
+
+    return res.status(201).json({message: "Employee created successfully", employee})
+  } 
+  catch (error) {
+    res.status(500).json({error: error.message})
   }
 }
 
@@ -41,5 +48,28 @@ module.exports.deleteEmployee= async(req, res)=>{
   } catch (err) {
     console.error(err)
     return res.status(500).json({message: 'Server error! Try again !!'})
+  }
+}
+
+module.exports.employeeDashboard= async(req, res)=>{
+  const tasks = await Task.find({assignedTo: req.employee._id})
+  res.json(tasks)
+}
+
+module.exports.changeEmployeePassword = async(req, res)=>{
+  try {
+    const {oldPassword, newPassword}= req.body
+    const employee= await Employee.findById(req.employee._id)
+    if (!employee) return res.status(404).json({ message: 'Employee not found' })
+    const isMatch= await bcrypt.compare(oldPassword, employee.password)
+    if (!isMatch) return res.status(400).json({ message: 'Old password incorrect' })
+
+    employee.password= await bcrypt.hash(newPassword, 10)
+    await employee.save()
+
+    res.status(200).json({ message: 'Password updated successfully' })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ message: 'Error changing password' })
   }
 }

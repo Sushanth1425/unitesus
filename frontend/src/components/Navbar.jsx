@@ -12,7 +12,7 @@ const Navbar = () => {
   }, [dark])
 
   const baseClass = 'px-3 py-2 rounded-md transition-all duration-200 cursor-pointer'
-  const currClass = 'bg-primary-600 text-white shadow-md'
+  const currClass = 'nav-active'
 
   return (
     <header className="w-full bg-card shadow-sm py-3 px-4 flex items-center justify-between">
@@ -20,11 +20,11 @@ const Navbar = () => {
         <div className="text-2xl font-semibold text-primary-600">UNITESUS</div>
         {user && (
           <nav className='hidden md:flex gap-3 text-sm'>
-            <NavLink to={user.role==='admin' ? '/admin' : '/dashboard'} className={({isActive}) => `${baseClass} ${isActive ? currClass : 'hover:bg-primary-50'}`} > Dashboard</NavLink>
+            <NavLink to={user.role==='admin' ? '/admin' : '/dashboard'} className={({isActive}) => `${baseClass} ${isActive ? 'nav-active' : ''}}`} > Dashboard</NavLink>
             {user.role==='admin' && (
               <>
-                <NavLink to='/employees' className={({isActive}) => `${baseClass} ${isActive ? currClass : 'hover:bg-primary-50'}`}>Employees</NavLink>
-                <NavLink to='/tasks' className={({isActive}) => `${baseClass} ${isActive ? currClass : 'hover:bg-primary-50'}`}> Tasks </NavLink>
+                <NavLink to='/employees' className={({isActive}) => `${baseClass} ${isActive ? 'nav-active' : ''}`}>Employees</NavLink>
+                <NavLink to='/tasks' className={({isActive}) => `${baseClass} ${isActive ? 'nav-active' : ''}`}> Tasks </NavLink>
               </>
             )}
           </nav>
