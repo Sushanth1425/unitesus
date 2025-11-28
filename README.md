@@ -254,7 +254,8 @@ Open browser: [http://localhost:5173](http://localhost:5173)
 
 ##  Screenshots
 
-> Add screenshots here or a short Loom/Drive link
+#####  Login Page
+<img width="1919" height="1000" alt="Image" src="https://github.com/user-attachments/assets/3bfaa29e-5308-47d4-ab6a-d595ce5515a1" />
 
 * Admin Dashboard
 * Employee Dashboard
