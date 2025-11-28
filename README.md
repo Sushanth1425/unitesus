@@ -13,6 +13,27 @@ This project demonstrates structured backend architecture, role-based authentica
 * **Backend API:** [https://unitesus.onrender.com/](https://unitesus.onrender.com/)
 
 ---
+---
+
+##  Screenshots
+
+#####  Login Page
+<img width="1919" height="1000" alt="Image" src="https://github.com/user-attachments/assets/3bfaa29e-5308-47d4-ab6a-d595ce5515a1" />
+
+##### Admin Dashboard
+<img width="1919" height="1000" alt="Image" src="https://github.com/user-attachments/assets/c4fc5bc0-dbe6-45b0-92d1-677bc8df5c03" />
+
+##### Employees Management
+<img width="1919" height="1000" alt="image" src="https://github.com/user-attachments/assets/6546fb92-2f27-4f3b-8b79-7c227494e0bc" />
+
+##### Task Assignment
+<img width="1919" height="1000" alt="image" src="https://github.com/user-attachments/assets/dfe66ecf-b298-4c25-a595-e2a00a9d15dc" />
+
+##### Employee Dashboard
+<img width="1920" height="1000" alt="Image" src="https://github.com/user-attachments/assets/d4c16d96-96a2-4401-8a00-7710387fe207" />
+
+
+---
 
 ##  Features
 
@@ -79,13 +100,18 @@ This project demonstrates structured backend architecture, role-based authentica
 ```
 backend/
 │
+├── config/
+│    └── db.js
+|
 ├── controllers/
 │   ├── authController.js
 │   ├── employeeController.js
+│   ├── dashboardController.js
 │   └── taskController.js
 │
 ├── middlewares/
 │   ├── authMiddleware.js
+│   ├── employeeAuthMiddleware.js
 │   └── roleMiddleware.js
 │
 ├── models/
@@ -95,11 +121,12 @@ backend/
 │
 ├── routes/
 │   ├── authRoutes.js
+│   ├── dashboardRoutes.js
 │   ├── employeeRoutes.js
 │   └── taskRoutes.js
 │
 ├── utils/
-│   └── seedAdmin.js
+│    └── seedAdmin.js
 │
 ├── .env
 ├── ex.env
@@ -117,6 +144,8 @@ frontend/
 │   ├── components/
 │   ├── context/
 │   └── utils/
+├── App.jsx
+├── main.jsx
 ├── .env
 └── vite.config.js
 ```
@@ -249,18 +278,6 @@ npm run dev
 ```
 
 Open browser: [http://localhost:5173](http://localhost:5173)
-
----
-
-##  Screenshots
-
-#####  Login Page
-<img width="1919" height="1000" alt="Image" src="https://github.com/user-attachments/assets/3bfaa29e-5308-47d4-ab6a-d595ce5515a1" />
-
-* Admin Dashboard
-* Employee Dashboard
-* Task Assignment Screen
-* Login Page
 
 ---
 
