@@ -4,8 +4,9 @@ import { AuthContext } from '../context/AuthContext'
 
 const Tasks = () => {
   const [tasks, setTasks]= useState([])
-  const [form, setForm]= useState({ title: '', status: 'Todo' })
+  const [form, setForm]= useState({title: '', status: 'Todo', assignedTo: ''})
   const [editId, setEditId]= useState(null)
+  const [employees, setEmployees]= useState([]);  
   const [query, setQuery]= useState('')
   const [statusFilter, setStatusFilter]= useState('')
 
@@ -20,9 +21,19 @@ const Tasks = () => {
     }
   }
 
+  const fetchEmployees= async()=>{
+    try {
+      const res = await API.get('/employees'); 
+      setEmployees(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   useEffect(()=>{
     const load = async () => {
       await fetchTasks()
+      await fetchEmployees()
     }
     load()
   }, [])
@@ -32,18 +43,27 @@ const Tasks = () => {
       alert('User not logged in!');
       return;
     }
-    const payload= {...form, assignedTo: user.id}
+    if (!form.title.trim()) {
+      alert('Task title is required')
+      return
+    }
+    if (!form.assignedTo) {
+      alert('Please select an employee')
+      return
+    }
+
+    const payload= {title: form.title, status: form.status, assignedTo: form.assignedTo}
 
     if (editId) await API.put(`/tasks/${editId}`, payload)
     else await API.post('/tasks', payload)
 
-    setForm({title: '', status: 'Todo'})
+    setForm({title: '', status: 'Todo', assignedTo: ''})
     setEditId(null)
     fetchTasks()
   }
 
   const handleEdit= async(task)=>{
-    setForm({title: task.title, status: task.status})
+    setForm({title: task.title, status: task.status, assignedTo: task.assignedTo?._id || task.assignedTo})
     setEditId(task._id)
   }
 
@@ -63,6 +83,12 @@ const Tasks = () => {
             <option>Todo</option>
             <option>In Progress</option>
             <option>Completed</option>
+          </select>
+          <select value={form.assignedTo} onChange={e=> setForm({...form, assignedTo: e.target.value})} className='border px-3 py-2 rounded' >
+            <option value="">Assign Employee</option>
+            {employees.map(emp=>(
+              <option key={emp._id} value={emp._id}>{emp.name}</option>
+            ))}
           </select>
           <button onClick={handleSubmit} className="bg-primary-600 text-white px-4 py-2 rounded"> {editId ? 'Update' : 'Add'} </button>
         </div>
