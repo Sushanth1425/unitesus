@@ -108,9 +108,9 @@ const Tasks = () => {
             <div key={task._id} className='bg-card p-3 rounded shadow hover:shadow-xl transition'>
               <div className="font-medium"> {task.title} </div>
               <div className="text-muted text-sm"> {task.status} </div>
-              <div className="flex gap-3">
-                <button className="text-blue-500" onClick={()=> handleEdit(task)}> Edit </button>
-                <button className="text-red-500" onClick={()=> handleDelete(task._id)}> Delete </button>
+              <div className="flex gap-3 mt-3">
+                <button className="text-blue-500 px-4 p-2 rounded-md" onClick={()=> handleEdit(task)}> Edit </button>
+                <button className="text-red-500 px-4 p-2 rounded-md" onClick={()=> handleDelete(task._id)}> Delete </button>
             </div>
            </div>
           ))}

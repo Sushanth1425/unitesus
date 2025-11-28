@@ -7,8 +7,8 @@ const EmployeeCard = ({employee, onEdit, onDelete}) => {
       <p className="text-muted text-sm">{employee.email}</p>
 
       <div className="flex gap-3 mt-3">
-        <button onClick={() => onEdit(employee)}className="text-primary-600 hover:underline">Edit</button>
-        <button onClick={() => onDelete(employee._id)} className="text-red-500 hover:underline">Delete</button>
+        <button onClick={() => onEdit(employee)}className="text-primary-600 px-4 p-2 rounded-md hover:underline">Edit</button>
+        <button onClick={() => onDelete(employee._id)} className="text-red-500 px-4 p-2 rounded-md hover:underline">Delete</button>
       </div>
     </motion.div>
   )
