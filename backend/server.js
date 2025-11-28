@@ -22,7 +22,7 @@ const taskRoutes= require('./routes/taskRoutes')
 const dashRoutes= require('./routes/dashboardRoutes')
 
 app.use('/api/auth', authRoutes)
-app.use('/api/employee', empRoutes)
+app.use('/api/employees', empRoutes)
 app.use('/api/tasks', taskRoutes)
 app.use('/api/dashboard', dashRoutes)
 
