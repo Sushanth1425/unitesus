@@ -1,25 +1,80 @@
-# uniteSUS 
+# UniteSUS – Employee Task Management System
 
-A role-based task & employee management backend built with **Node.js, Express, MongoDB, and JWT Authentication**.
+A full-stack Employee & Task Management Platform built with **React.js, Node.js, Express, MongoDB, and JWT Authentication** that allows Admins to manage employees, assign tasks, track progress, and monitor performance, while Employees can securely log in, view their assigned tasks, and update task statuses.
 
-This backend powers the Dev Colab platform, enabling admins to manage employees and tasks, while regular users can view assigned data securely.
+This project demonstrates structured backend architecture, role-based authentication, and a modern UI with a clean purple-themed design.
 
 ---
 
-## 🚀 Tech Stack (Backend)
+
+##  Live Demo
+
+* **Frontend (Vercel):** [https://unitesus.vercel.app/](https://unitesus.vercel.app/)
+* **Backend API:** [https://unitesus.onrender.com/](https://unitesus.onrender.com/)
+
+---
+
+##  Features
+
+### Admin Features
+
+* Secure Admin Login
+* Create / Edit / Delete Employees
+* Assign Tasks to Employees
+* View All Employees & Their Tasks
+* Analytics Overview (Tasks status distribution)
+
+### Employee Features
+
+* Secure Login with email & password
+* View Assigned Tasks
+* Change Own Password
+* Personal Dashboard
+
+###  Authentication & Security
+
+* JWT-based Authentication
+* Role-based Access Control (Admin / Employee)
+* Password hashing using bcrypt
+* Protected routes on frontend
+
+---
+
+##  Bonus Implementations
+
+*  Role-based middleware (Admin-only routes)
+*  Deployment links included
+*  Task visualization cards
+*  Real-time UI sync after task updates
+*  Real database integration
+
+---
+
+##  Tech Stack
+
+### Frontend
+
+* React.js
+* React Router DOM
+* Tailwind CSS
+* Axios
+* React Hook Form
+* Context API
+
+### Backend
 
 * Node.js
 * Express.js
 * MongoDB + Mongoose
 * JWT Authentication
-* BcryptJS (Password hashing)
-* Express Validator
-* Helmet & CORS
-* Role-based Access Control (Admin/User)
+* bcryptjs
+* dotenv
 
 ---
 
-## 📁 Project Structure
+## 📂 Project Structure
+
+### Backend
 
 ```
 backend/
@@ -52,219 +107,181 @@ backend/
 └── package.json
 ```
 
----
+### Frontend
 
-## ✅ Backend Status
-
-✔ Authentication System
-✔ JWT Token Validation
-✔ Role-Based Access Control
-✔ Admin-only Protected Routes
-✔ CRUD for Employees
-✔ CRUD for Tasks
-✔ Admin Seeder Script
-✔ Input Validation & Security Middleware
-
-🎯 **Backend is production-ready and complete.**
-We can safely move to frontend development.
-
----
-
-## 🔧 Installation & Setup
-
-### 1. Clone Repository
-
-```bash
-git clone <your-repo-url>
-cd backend
+```
+frontend/
+│
+├── src/
+│   ├── pages/
+│   ├── components/
+│   ├── context/
+│   └── utils/
+├── .env
+└── vite.config.js
 ```
 
-### 2. Install Dependencies
+---
 
-```bash
-npm install
-```
+# API Overview (Backend)
 
-### 3. Environment Variables
+## Authentication
 
-Copy `ex.env` and rename to `.env`
+- **POST /api/auth/login**  
+  Login a user by providing email and password.
+
+- **POST /api/auth/register**  
+  Register a new user with name, email, and password.
+
+## Employees
+
+- **GET /api/employees**  
+  Get a list of all employees.
+
+- **POST /api/employees**  
+  Create a new employee.
+
+- **PUT /api/employees/:id**  
+  Update an existing employee by their ID.
+
+- **DELETE /api/employees/:id**  
+  Delete an employee by their ID.
+
+## Tasks
+
+- **GET /api/tasks**  
+  Get a list of all tasks.
+
+- **POST /api/tasks**  
+  Create a new task.
+
+- **PUT /api/tasks/:id**  
+  Update an existing task by its ID.
+
+- **DELETE /api/tasks/:id**  
+  Delete a task by its ID.
+
+---
+
+## Security Features
+
+- **JWT-based Authentication**  
+  JSON Web Tokens for secure authentication.
+
+- **Role-based Middleware**  
+  Protect routes based on the user's role (e.g., admin, user).
+
+- **Secure Password Hashing**  
+  Passwords are securely hashed using bcrypt before being stored.
+
+- **Input Sanitization**  
+  Input data is sanitized to prevent malicious inputs.
+
+- **XSS & Injection Protection**  
+  Protection against cross-site scripting (XSS) and SQL/NoSQL injection attacks.
+
+- **CORS + Helmet Integration**  
+  CORS (Cross-Origin Resource Sharing) is configured, and Helmet is used for security headers.
+
+---
+
+##  Environment Variables
+
+### Backend `.env`
 
 ```
 PORT=5000
-MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/devcolab
+MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-ADMIN_PWD=Admin@123
+FRONTEND_URL=http://localhost:5173
+ADMIN_PWD=Admin@1233#change it if u want
 ```
 
-### 4. Run Admin Seeder
+### Frontend `.env`
 
-Creates default admin account
-
-```bash
-npm run seedAdmin
 ```
-
-### 5. Start Server
-
-```bash
-npm run dev
+VITE_API_URL=http://localhost:5000/api
 ```
-
-Server runs on: `http://localhost:5000`
 
 ---
 
-## 🔐 Default Admin Credentials
+##  Test Credentials
+
+### Admin
 
 ```
 Email: admin@unitesus.com
-Password: (value from ADMIN_PWD in .env)
+Password: Admin@123
+```
+
+### Employee
+
+```
+Email: sus@unitesus.com
+Password: sus
 ```
 
 ---
 
-## 📡 API Documentation
+##  Setup Instructions
 
-### 🔑 Authentication
+### 1️. Clone Repository
 
-#### Register User
-
-POST `/api/auth/register`
-
-```json
-{
-  "name": "John",
-  "email": "john@gmail.com",
-  "password": "123456"
-}
+```bash
+git clone https://https://github.com/Sushanth1425/unitesus
+cd unitesus
 ```
 
-#### Login
+### 2️. Backend Setup
 
-POST `/api/auth/login`
-
-```json
-{
-  "email": "john@gmail.com",
-  "password": "123456"
-}
+```bash
+cd backend
+npm install
+npm run dev
 ```
 
-Response:
+### 3️. Frontend Setup
 
-```json
-{
-  "token": "JWT_TOKEN_HERE"
-}
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
----
-
-## 👥 Employee Routes
-
-| Method | Endpoint           | Role       | Description       |
-| ------ | ------------------ | ---------- | ----------------- |
-| GET    | /api/employees     | User/Admin | Get all employees |
-| POST   | /api/employees     | Admin      | Create employee   |
-| PUT    | /api/employees/:id | Admin      | Update employee   |
-| DELETE | /api/employees/:id | Admin      | Delete employee   |
-
-Sample Create Employee
-
-```json
-{
-  "name": "Alice",
-  "email": "alice@gmail.com",
-  "department": "Design"
-}
-```
+Open browser: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## ✅ Task Routes
+##  Screenshots
 
-| Method | Endpoint       | Role       | Description   |
-| ------ | -------------- | ---------- | ------------- |
-| GET    | /api/tasks     | User/Admin | Get all tasks |
-| POST   | /api/tasks     | Admin      | Create task   |
-| PUT    | /api/tasks/:id | Admin      | Update task   |
-| DELETE | /api/tasks/:id | Admin      | Delete task   |
+> Add screenshots here or a short Loom/Drive link
 
-Sample Create Task
-
-```json
-{
-  "title": "Fix UI",
-  "assignedTo": "EMPLOYEE_ID",
-  "status": "pending"
-}
-```
+* Admin Dashboard
+* Employee Dashboard
+* Task Assignment Screen
+* Login Page
 
 ---
 
-## 🛡 Security Features
+##  Assumptions
 
-* Password hashing with bcrypt
-* JWT Authorization headers
-* Admin-only middleware
-* Helmet for HTTP protection
-* Input Sanitization
-* SQL Injection & XSS Prevention (validated inputs)
-* CORS Protection
-
----
-
-## 📜 Available Commands
-
-| Command           | Description             |
-| ----------------- | ----------------------- |
-| npm run dev       | Run backend in dev mode |
-| npm start         | Run production server   |
-| npm run seedAdmin | Create default admin    |
+* Admin manually creates employee accounts and assigns passwords
+* Employees can update their own passwords anytime
+* Tasks are linked to employees using MongoDB ObjectId reference
+* Email is used as the unique identifier for authentication
+* Only Admin can CRUD employees and tasks
+* JWT stored in localStorage for session persistence
 
 ---
 
-## 🧪 Testing API
+---
 
-Use Postman or Thunder Client with header:
+##  Author
 
-```
-Authorization: Bearer <your_token>
-```
+**Sushanth Balasekaran**
+
+
+GitHub: [https://github.com/Sushanth1425](https://github.com/Sushanth1425)
 
 ---
 
-## 📌 Next Step
-
-✅ Backend Completed
-➡ Ready for Frontend Implementation
-
-Frontend Plan:
-
-* React + Vite
-* Tailwind CSS v4
-* Dark Mode Toggle
-* Secure Forms
-* Input Validation & XSS Protection
-* Role-based UI (Admin/User Dashboards)
-
----
-
-## 🧠 Future Enhancements
-
-* Real-time notifications (WebSocket)
-* Activity logs
-* Role hierarchy (Manager, HR)
-* Task progress tracker
-
----
-
-## 👨‍💻 Author
-
-Sushanth Balasekaran
-Frontend Developer / MERN Stack Developer
-
----
-
-✅ Backend Module Completed Successfully
-Ready to move forward 🚀
