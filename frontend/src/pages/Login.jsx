@@ -39,7 +39,7 @@ const Login = () => {
             {errors.password && <small className="text-red-500">Password is required</small>}
           </div>
           <div>
-            <button className='w-full py-2 rounded bg-primary-600 text-white' type='submit'> Submit </button>
+            <button className='w-full py-2 rounded bg-primary-600 hover:bg-primary-700 text-white' type='submit'> Submit </button>
           </div>
         </form>
       </div>

@@ -25,3 +25,17 @@ body {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
 }
+
+.input {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+[data-theme="dark"] select {
+  background-color: #1f2937;
+  color: white;
+}
+[data-theme="dark"] option {
+  color: white;
+}

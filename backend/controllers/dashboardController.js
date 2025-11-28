@@ -3,12 +3,12 @@ const Task= require('../models/Task')
 
 module.exports.dashboardData= async(req, res)=>{
   try {
-    const totEmployees= await Employee.countDocuments()
-    const totTasks= await Task.countDocuments()
-    const completedTasks= await Task.countDocuments({status: 'Completed'})
-    const inProgressTasks= await Task.countDocuments({status: 'In Progress'})
+    const totalEmployees= await Employee.countDocuments()
+    const totalTasks= await Task.countDocuments()
+    const completed= await Task.countDocuments({status: 'Completed'})
+    const inProgress= await Task.countDocuments({status: 'In Progress'})
 
-    return res.json({totEmployees, totTasks, completedTasks, inProgressTasks})
+    return res.json({totalEmployees, totalTasks, completed, inProgress})
   } catch (err) {
     console.error(err)
     return res.status(500).json({message: 'Server error! Try again !!'})

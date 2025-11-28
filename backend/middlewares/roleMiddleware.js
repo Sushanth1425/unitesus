@@ -5,7 +5,7 @@ const roleCheck= (role)=>{
       if (req.user.role !== role) return res.status(403).json({message: 'Access denied: Admin only'})
       next()
     }
-    catch (error) {
+    catch (err) {
       console.error(err)
       return res.status(500).json({message: 'Server error! Try again !!'})
     }

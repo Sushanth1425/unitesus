@@ -1,15 +1,16 @@
-import React from 'react'
+import { motion } from 'framer-motion'
 
-const EmployeeCard = ({employee,onEdit,onDelete}) => {
+const EmployeeCard = ({employee, onEdit, onDelete}) => {
   return (
-    <div className='bg-card p-4 rounded-lg shadow-md hover:shadow-xl transition-all'>
-      <h3> {employee.name} </h3>
-      <p> {employee.email} </p>
-      <div className='flex gap-2 mt-2'>
-        <button onClick={()=>onEdit(employee)} className='text-blue-500'>Edit</button>
-        <button onClick={()=>onDelete(employee._id)} className='text-red-500'>Delete</button>
+    <motion.div initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.3 }} className="bg-card p-4 rounded-xl shadow hover:shadow-lg">
+      <h3 className="font-semibold text-lg">{employee.name}</h3>
+      <p className="text-muted text-sm">{employee.email}</p>
+
+      <div className="flex gap-3 mt-3">
+        <button onClick={() => onEdit(employee)}className="text-primary-600 hover:underline">Edit</button>
+        <button onClick={() => onDelete(employee._id)} className="text-red-500 hover:underline">Delete</button>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
