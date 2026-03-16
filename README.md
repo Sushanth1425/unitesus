@@ -13,7 +13,6 @@ This project demonstrates structured backend architecture, role-based authentica
 * **Backend API:** [https://unitesus.onrender.com/](https://unitesus.onrender.com/)
 
 ---
----
 
 ##  Screenshots
 
